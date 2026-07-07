@@ -23,6 +23,7 @@ st.markdown("""
 Aplikasi ini membantu **Jaya Jaya Institut** memprediksi status siswa (Dropout, Enrolled, atau Graduate)
 berdasarkan data akademik, demografis, dan sosial-ekonomi. Isi data siswa di bawah untuk mendapatkan prediksi.
 """)
+
 tab1, tab2, tab3, tab4 = st.tabs(["👤 Demografis", "💰 Finansial", "📚 Akademik (Awal)", "📊 Performa Semester"])
 
 with tab1:
@@ -31,7 +32,7 @@ with tab1:
     with col1:
         marital_status = st.selectbox("Status Pernikahan",
             options=[1, 2, 3, 4, 5, 6],
-            format_func=lambda x: {1:"Single", 2:"Menikah", 3:"Duda/Janda", 4:"Cerai", 5:"Union", 6:"Pisah Hukum"}[x])
+            format_func=lambda x: {1: "Single", 2: "Menikah", 3: "Duda/Janda", 4: "Cerai", 5: "Union", 6: "Pisah Hukum"}[x])
         gender = st.selectbox("Jenis Kelamin", options=[1, 0], format_func=lambda x: "Laki-laki" if x == 1 else "Perempuan")
         age_at_enrollment = st.number_input("Usia saat Mendaftar", min_value=17, max_value=70, value=20)
         nacionality = st.number_input("Kode Kewarganegaraan", min_value=1, value=1, help="1 = Portuguese (default)")
@@ -98,6 +99,7 @@ with tab4:
         cu_2nd_approved = st.number_input("Mata Kuliah Approved (Sem 2)", min_value=0, value=5)
         cu_2nd_grade = st.number_input("Rata-rata Nilai (Sem 2)", min_value=0.0, max_value=20.0, value=12.0)
         cu_2nd_without_eval = st.number_input("Tanpa Evaluasi (Sem 2)", min_value=0, value=0)
+
 st.markdown("---")
 
 if st.button("🔍 Prediksi Status Siswa", use_container_width=True, type="primary"):
