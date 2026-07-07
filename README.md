@@ -65,7 +65,7 @@ Dashboard dibuat menggunakan **Metabase** untuk membantu Jaya Jaya Institut memo
 
 Screenshot dashboard dapat dilihat pada folder `arfaniasra_dicoding-dashboard/`, dan juga ditampilkan di bawah ini:
 
-![Dashboard Monitoring Performa Siswa](images/dashboard_metabase.png)
+![Dashboard Monitoring Performa Siswa](arfaniasra_dicoding-dashboard.png)
 
 **Cara menjalankan dashboard secara lokal:**
 
