@@ -40,6 +40,18 @@ Menjalankan notebook:
 jupyter notebook notebook.ipynb
 ```
 
+## Exploratory Data Analysis (EDA)
+
+Sebelum membangun model dan dashboard, dilakukan eksplorasi data untuk memahami pola dan hubungan antar fitur terhadap status kelulusan siswa. Analisis lengkap dapat dilihat pada `notebook.ipynb`, berikut beberapa temuan utamanya:
+
+![Correlation Heatmap](images/correlation_heatmap.png)
+
+Correlation heatmap di atas menunjukkan bahwa fitur-fitur performa akademik semester 1 dan 2 (jumlah mata kuliah credited, enrolled, evaluated, approved, dan grade) saling berkorelasi kuat satu sama lain, dan juga berkorelasi cukup kuat terhadap status kelulusan siswa.
+
+![Boxplot Fitur Kunci vs Status](images/boxplot_fitur_kunci.png)
+
+Boxplot di atas memperlihatkan pola yang jelas: siswa dengan status Dropout secara konsisten memiliki median jumlah mata kuliah yang disetujui (approved) mendekati 0-2, jauh lebih rendah dibanding siswa Graduate (5-7), baik di semester 1 maupun 2. Usia saat mendaftar juga terlihat lebih tinggi dan lebih tersebar pada kelompok Dropout dibanding Graduate.
+
 ## Business Dashboard
 
 Dashboard dibuat menggunakan **Metabase** untuk membantu Jaya Jaya Institut memonitor performa siswa. Dashboard ini menampilkan:
@@ -51,7 +63,9 @@ Dashboard dibuat menggunakan **Metabase** untuk membantu Jaya Jaya Institut memo
 5. Rata-rata usia saat mendaftar per status
 6. Jumlah siswa per program studi
 
-Screenshot dashboard dapat dilihat pada folder `arfaniasra_dicoding-dashboard/`.
+Screenshot dashboard dapat dilihat pada folder `arfaniasra_dicoding-dashboard/`, dan juga ditampilkan di bawah ini:
+
+![Dashboard Monitoring Performa Siswa](images/dashboard_metabase.png)
 
 **Cara menjalankan dashboard secara lokal:**
 
@@ -91,6 +105,10 @@ Setelah dijalankan, aplikasi dapat diakses melalui browser di `http://localhost:
 
 Proyek ini bertujuan membantu Jaya Jaya Institut mendeteksi siswa yang berisiko dropout sejak dini, sehingga dapat diberikan bimbingan khusus sebelum terlambat.
 
+![Distribusi Status Siswa](images/distribusi_status.png)
+
+Dari 4.424 data siswa, distribusinya adalah 49,9% Graduate, 32,1% Dropout, dan 17,9% Enrolled — menunjukkan bahwa hampir sepertiga siswa mengalami dropout, sehingga masalah ini memang signifikan dan perlu ditangani.
+
 Berdasarkan hasil analisis dan pemodelan yang telah dilakukan, dapat disimpulkan:
 
 1. **Model prediksi**: Random Forest berhasil membangun model klasifikasi 3 kelas (Dropout/Enrolled/Graduate) dengan akurasi 77%, dan mampu mengidentifikasi siswa berisiko dropout dengan cukup baik (F1-score 0.77 untuk kelas Dropout).
@@ -100,6 +118,14 @@ Berdasarkan hasil analisis dan pemodelan yang telah dilakukan, dapat disimpulkan
 3. **Faktor finansial berperan signifikan.** Status pembayaran SPP yang tidak up-to-date dan status sebagai debtor sangat berkaitan dengan dropout, sementara kepemilikan beasiswa cenderung protektif terhadap dropout.
 
 4. **Faktor demografis turut berkontribusi**, khususnya usia saat pendaftaran — siswa yang mendaftar pada usia lebih tua menunjukkan kecenderungan dropout yang lebih tinggi dibanding siswa yang lebih muda.
+
+![Confusion Matrix Random Forest](images/confusion_matrix.png)
+
+Confusion matrix di atas menunjukkan bahwa model paling akurat mengklasifikasikan kelas Graduate dan Dropout, sementara kelas Enrolled paling sering tertukar dengan Graduate — hal ini wajar karena secara konsep, siswa yang "Enrolled" masih aktif dan belum pasti arah kelulusannya.
+
+![Feature Importance Random Forest](images/feature_importance.png)
+
+Grafik feature importance di atas mengonfirmasi bahwa jumlah mata kuliah yang disetujui (approved) dan nilai rata-rata pada semester 1 dan 2 adalah fitur paling berpengaruh terhadap prediksi model, sejalan dengan temuan pada tahap EDA.
 
 Dengan model dan dashboard monitoring ini, Jaya Jaya Institut memiliki dasar kuat untuk melakukan intervensi dini kepada siswa yang teridentifikasi berisiko tinggi dropout, alih-alih menunggu hingga siswa benar-benar keluar dari program studi.
 
